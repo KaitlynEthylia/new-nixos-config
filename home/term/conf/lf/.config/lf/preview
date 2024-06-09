@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+file=$1
+w=$2
+h=$3
+x=$4
+y=$5
+
+filetype=$(file -Lb --mime-type "$file")
+
+case $filetype in
+	image*)
+		echo "image previews broken sorry"
+		exit 1;;
+	video*)
+		echo "video previews broken sorry"
+		exit 1;;
+	application/pdf)
+		pdftotext $file -
+		exit 1;;
+esac
+
+theme=$(case ${file##*.} in
+	rs)
+		echo "rose-pine";;
+	hs)
+		echo "tokyonight";;
+	*)
+		echo "catppuccin";;
+esac)
+
+bat --color always --style="numbers" --theme $theme $file

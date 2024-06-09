@@ -1,0 +1,5 @@
+{ allExcept, ... }:
+
+{
+  imports = allExcept [] ./.;
+}
