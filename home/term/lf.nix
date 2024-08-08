@@ -5,6 +5,8 @@
     lf
     poppler_utils
     unzip
+    p7zip
+    unrar
     file
     jq
   ];

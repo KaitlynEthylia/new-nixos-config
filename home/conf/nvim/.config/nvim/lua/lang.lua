@@ -19,7 +19,7 @@ return setmetatable({}, {
 				else
 					---@diagnostic disable-next-line: param-type-mismatch
 					for _, v in ipairs(ftplugin.spec) do
-						v.ft = filetype
+						if not v.ft then v.ft = filetype end
 					end
 				end
 			end

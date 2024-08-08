@@ -3,7 +3,7 @@ with lib;
 {
   config.xdg = let
     home = path: /. + "${config.home.homeDirectory}" + path;
-  in rec {
+  in {
     enable = true;
     dataHome = home "/.local/share";
     stateHome = home "/.local/state";
@@ -12,7 +12,7 @@ with lib;
     mimeApps.enable = true;
     userDirs = {
       enable = true;
-      desktop = "${dataHome}/applications";
+      desktop = "${config.xdg.dataHome}/applications";
       documents = home "/Documents";
       download = home "/Files";
       music = home "/Media";
@@ -42,4 +42,8 @@ with lib;
         recursive = true;
       })
       (readDir path);
+
+  config.home.sessionVariables = {
+    __GL_SHADER_DISK_CACHE_PATH = "${config.xdg.cacheHome}/nv";
+  };
 }

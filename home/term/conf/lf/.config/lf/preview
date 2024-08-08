@@ -28,4 +28,4 @@ theme=$(case ${file##*.} in
 		echo "catppuccin";;
 esac)
 
-bat --color always --style="numbers" --theme $theme $file
+bat --color always --style="numbers" --theme "$theme" "$file"

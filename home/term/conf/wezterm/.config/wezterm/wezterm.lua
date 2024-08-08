@@ -34,6 +34,13 @@ return {
 	tab_bar_at_bottom = true,
 	hide_tab_bar_if_only_one_tab = true,
 
+	font = wezterm.font_with_fallback {
+		{ family = 'CaskaydiaCove Nerd Font Mono', weight = 400 },
+		{ family = 'Noto Sans Mono CJK JP', scale = 1.2 },
+		{ family = 'Noto Serif CJK JP', scale = 1.2 },
+		'Twitter Color Emoji',
+	},
+
 	launch_menu = {
 		prog 'lf',
 		prog 'nvim',

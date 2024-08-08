@@ -1,0 +1,14 @@
+{
+	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+	"runtime.version": "LuaJIT",
+	"diagnostics": {
+		"disable": [ "lowercase-global" ],
+		"globals": [ "awesome", "root", "client", "screen" ]
+	},
+	"workspace": {
+		"library": [
+			"/nix/store/4bnlvsi93dhah9494ic7llh8scipidh1-awesome-4.3/share/awesome/lib"
+		],
+		"checkThirdParty": false
+	}
+}

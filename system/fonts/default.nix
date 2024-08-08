@@ -6,6 +6,7 @@
       nerdfonts = prev.nerdfonts.override {
         fonts = [ "CascadiaCode" ];
       };
+      palatino = final.callPackage ./palatino.nix {};
     })
   ];
 
@@ -15,19 +16,25 @@
       roboto
       roboto-mono
       open-sans
-      noto-fonts
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
       twitter-color-emoji
-      (callPackage ./palatino.nix {})
+      palatino
     ];
 
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = [ "Palatino" ];
-        sansSerif = [ "Roboto" "Noto Sans" "Open Sans" ];
-        monospace = [ "CascadiaCode" "Roboto Mono" ];
+        serif = [ "PalatinoLTStd-Roman" ];
+        sansSerif = [ "Roboto" "Open Sans" ];
+        monospace = [ "CaskaydiaCove Nerd Font Mono" "Roboto Mono" ];
         emoji = [ "Twitter Color Emoji" ];
       };
     };
+  };
+
+  environment.sessionVariables = {
+    FONTCONFIG_FILE = "/etc/fonts/fonts.conf";
+    FONTCONFIG_PATH = "/etc/fonts";
   };
 }

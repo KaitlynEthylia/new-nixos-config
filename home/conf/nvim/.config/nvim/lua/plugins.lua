@@ -50,7 +50,7 @@ require 'lazy'.setup {
 	spec = spec,
 	lockfile = lazypath .. '/../lazy-lock.json',
 	dev = {
-		path = "~/Scratch/nvim",
+		path = "~/Files/nvim",
 		patterns = { 'LOCAL' },
 	},
 	install = { colorscheme = { 'catppuccin-mocha' } },

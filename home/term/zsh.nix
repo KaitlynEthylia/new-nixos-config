@@ -15,8 +15,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "marlonrichert";
           repo = "zsh-autocomplete";
-          rev = "6d059a3634c4880e8c9bb30ae565465601fb5bd2";
-          sha256 = "0NW0TI//qFpUA2Hdx6NaYdQIIUpRSd0Y4NhwBbdssCs=";
+          rev = "cfc3fd9a75d0577aa9d65e35849f2d8c2719b873";
+          sha256 = "sha256-QcPNXpTFRI59Oi59WP4XlC+xMyN6aHRPF4UpJ6E1vok=";
         };
       }
     ];
@@ -31,7 +31,7 @@
     '';
     profileExtra = ''
       function nixrb {
-        pushd ~/KaitlynEthylia
+        cd ~/KaitlynEthylia
         git add .
         if [ -f $TEMPEDIT_LIST ]; then
           while read line; do
@@ -42,7 +42,6 @@
           rm $TEMPEDIT_LIST
         fi
         doas nixos-rebuild switch --flake .#''${1:=$(hostname)}
-        popd
       }
     '';
   };

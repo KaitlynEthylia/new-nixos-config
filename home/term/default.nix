@@ -23,7 +23,7 @@
       "--group-directories-first"
     ];
   };
-  programs.zsh.shellAliases = {
+  home.shellAliases = {
     ls = "eza -la --group-directories-first";
     lg = "ls --git";
     tree = "ls --tree";
