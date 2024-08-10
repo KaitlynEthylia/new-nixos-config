@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    (jail (callPackage ./thorium.nix {}))
+    (jail.make thorium)
   ];
   files = [ ./conf ];
 }

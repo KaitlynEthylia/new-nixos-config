@@ -1,7 +1,7 @@
-{ allExcept, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  imports = allExcept [] ./.;
+  imports = lib.ethy.allExcept [] ./.;
 
   networking.hostName = "nix";
   networking.networkmanager.enable = true;
@@ -35,13 +35,6 @@
   ];
 
   programs.zsh.enable = true;
-
-  users.users.kaitlyn = {
-    isNormalUser = true;
-    description = "kaitlyn";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-  };
 
   services.udisks2.enable = true;
 

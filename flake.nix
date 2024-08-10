@@ -1,71 +1,47 @@
 {
+  description = "KaitlynEthylia's personal configs.";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
-    home.url = "github:nix-community/home-manager";
-    musnix.url = "github:musnix/musnix";
-    nix-index.url = "github:nix-community/nix-index-database";
     lix.url = "git+https://git.lix.systems/lix-project/nixos-module";
 
-    home.inputs.nixpkgs.follows = "nixpkgs";
-    musnix.inputs.nixpkgs.follows = "nixpkgs";
-    nix-index.inputs.nixpkgs.follows = "nixpkgs";
-    lix.inputs.nixpkgs.follows = "nixpkgs";
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "path:/home/kaitlyn/Files/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-index = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nix-index-db
+
+    # simple-nixos-mailserver
+    # arkenfox??
+    # agenix
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [
-          (final: prev: {
-            jail = pkg: let
-              exe = final.lib.getExe pkg;
-            in final.writeShellScriptBin (builtins.baseNameOf exe) ''
-              exec jail ${exe} $@
-            '';
-          })
-        ];
-      };
-      libs = import ./lib/attrsImport.nix { inherit pkgs; } ./lib;
-    in
-    rec {
-      nixosConfigurations.nix = nixpkgs.lib.nixosSystem {
-        inherit pkgs;
-        specialArgs = libs;
-        modules = with inputs; [
-          ./common
-          ./hardware
-          ./system
-          catppuccin.nixosModules.catppuccin
-          musnix.nixosModules.musnix
-          home.nixosModules.home-manager
-          lix.nixosModules.default
-          {
-            home-manager = {
-              extraSpecialArgs = libs;
-              useGlobalPkgs = true;
-              users.kaitlyn.imports = [
-                ./common
-                ./home
-                catppuccin.homeManagerModules.catppuccin
-                nix-index.hmModules.nix-index
-              ];
-            };
-            # otherwise home-manager breaks
-            programs.dconf.enable = true;
-          }
-          {
-            nix.registry = {
-              self.flake = self;
-              nixpkgs.flake = nixpkgs;
-            };
-          }
-        ];
-      };
-      devShells.${system} = nixosConfigurations.nix.config.ethy.shells;
-      templates = nixosConfigurations.nix.config.ethy.templates;
+  outputs = { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      imports = [
+        ./lib
+        ./packages
+        ./systems
+      ];
     };
 }

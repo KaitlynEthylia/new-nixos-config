@@ -1,7 +1,7 @@
-{ allExcept, config, ... }:
+{ lib, config, ... }:
 
 {
-  imports = allExcept [] ./.;
+  imports = lib.ethy.allExcept [] ./.;
 
   programs.bat = {
     enable = true;

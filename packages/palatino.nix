@@ -1,5 +1,5 @@
 # https://github.com/jeslie0/fonts/blob/main/flake.nix
-{ stdenvNoCC, fetchzip }:
+{ stdenvNoCC, fetchzip, ... }:
 
 stdenvNoCC.mkDerivation {
   name = "palatino";

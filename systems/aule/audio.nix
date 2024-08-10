@@ -18,6 +18,4 @@
       min-quantum = 8;
     };
   };
-
-  users.users.kaitlyn.extraGroups = [ "audio" ];
 }

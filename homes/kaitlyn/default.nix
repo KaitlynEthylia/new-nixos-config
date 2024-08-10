@@ -1,12 +1,13 @@
-{ allExcept, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  imports = (allExcept [
-    ./lang
-    ./wine
-  ] ./.) ++ (allExcept [] ./lang);
+  imports = builtins.trace (lib.hm) [];
+  # imports = (lib.ethy.allExcept [
+  #   ./lang
+  #   ./wine
+  # ] ./.) ++ (lib.ethy.allExcept [] ./lang);
 
-  files = [ ./conf/home ];
+  # files = [ ./conf/home ];
 
   home = {
     username = "kaitlyn";
@@ -14,9 +15,10 @@
   };
 
   home.packages = with pkgs; [
+    jail
     pinta
     blender
-    (jail vesktop)
+    (jail.make vesktop)
     ffmpeg
     yt-dlp
     zenity
@@ -32,7 +34,6 @@
     OPENER = "xdg-open";
   };
 
-  home.stateVersion = "23.05";
   programs.home-manager.enable = true;
   programs.nix-index.enable = true;
 }

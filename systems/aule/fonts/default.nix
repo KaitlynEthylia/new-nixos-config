@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (final: prev: {
-      nerdfonts = prev.nerdfonts.override {
-        fonts = [ "CascadiaCode" ];
-      };
-      palatino = final.callPackage ./palatino.nix {};
-    })
-  ];
-
   fonts = {
     packages = with pkgs; [
       nerdfonts

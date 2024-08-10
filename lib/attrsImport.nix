@@ -1,8 +1,10 @@
-{ pkgs, ... }:
-with builtins;
-cwd: listToAttrs (map
-  (path: {
-    name = replaceStrings [".nix"] [""] path;
-    value = (import (pkgs.lib.path.append cwd path)) { inherit pkgs; };
-  })
-  (attrNames (readDir cwd)))
+{ 
+  flake.lib.attrsImport =
+    let inherit (builtins) listToAttrs replaceStrings;
+    in paths: args: listToAttrs (map
+      (path: {
+        name = replaceStrings [".nix"] [""] (baseNameOf path);
+        value = if args != null then (import path) args else path;
+      })
+      paths);
+}

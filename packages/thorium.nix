@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, ... }:
 pkgs.stdenv.mkDerivation rec {
   pname = "thorium-browser";
   version = "124.0.6367.218";
