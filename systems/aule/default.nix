@@ -3,7 +3,6 @@
 {
   imports = lib.ethy.allExcept [] ./.;
 
-  networking.hostName = "nix";
   networking.networkmanager.enable = true;
 
   boot.loader.grub = {
@@ -37,6 +36,4 @@
   programs.zsh.enable = true;
 
   services.udisks2.enable = true;
-
-  system.stateVersion = "23.05";
 }

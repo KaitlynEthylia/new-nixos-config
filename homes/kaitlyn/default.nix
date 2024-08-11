@@ -1,13 +1,12 @@
 { lib, pkgs, ... }:
 
 {
-  imports = builtins.trace (lib.hm) [];
-  # imports = (lib.ethy.allExcept [
-  #   ./lang
-  #   ./wine
-  # ] ./.) ++ (lib.ethy.allExcept [] ./lang);
+  imports = (lib.ethy.allExcept [
+    ./lang
+    ./wine
+  ] ./.) ++ (lib.ethy.allExcept [] ./lang);
 
-  # files = [ ./conf/home ];
+  files = [ ./conf/home ];
 
   home = {
     username = "kaitlyn";

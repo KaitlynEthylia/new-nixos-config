@@ -1,4 +1,4 @@
-{ luaValue, config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   addons = {
     luafilesystem = pkgs.fetchFromGitHub {
@@ -38,7 +38,7 @@ in
     plugins = [ "folke/neodev.nvim" ];
     null_ls.builtins = [ "formatting.stylua" ];
     setup = let
-      settings = luaValue {
+      settings = lib.ethy.luaValue {
         settings.Lua = {
           format.enable = false;
           workspace = {

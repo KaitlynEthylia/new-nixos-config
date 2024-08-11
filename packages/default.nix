@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 let
-  inherit (self.lib) allExcept attrsImport;
+  inherit (self.lib) attrsImport allExcept;
   derivations = attrsImport (allExcept [] ./.) null; 
 in {
   perSystem = { system, lib, ... }:
@@ -18,7 +18,7 @@ in {
     _module.args.pkgs = pkgs;
   };
 
-  flake.overlays.default = _: prev: builtins.mapAttrs
-      (_: path: prev.callPackage path {})
+  flake.overlays.default = final: prev: builtins.mapAttrs
+      (_: path: final.lib.callPackageWith prev path {})
       derivations;
 }

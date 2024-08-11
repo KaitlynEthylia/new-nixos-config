@@ -1,4 +1,4 @@
-{ luaValue, config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;
 {
   options.ethy.ftplugin = mkOption {
@@ -83,6 +83,7 @@ with lib;
   config.xdg.configFile = with builtins; mapAttrs
     (k: v:
       let
+        inherit (ethy) luaValue;
         elv = v: f: if v != null then f v else "";
         wrapFn = str: "function() ${str} end";
         plugins = elv v.plugins (v: "spec = ${luaValue v},");

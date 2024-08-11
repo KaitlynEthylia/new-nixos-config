@@ -1,18 +1,25 @@
-{ self, inputs, lib, ... }:
-let allExcept = (import ./allExcept.nix { inherit lib; }).flake.lib.allExcept;
+{ self, withSystem, inputs, lib, ... }:
+let
+  allExcept = (import ./allExcept.nix { inherit (inputs.nixpkgs) lib; });
+  attrsImport = (import ./attrsImport.nix {});
+  ethy' = (lib: {
+    ethy = attrsImport (allExcept [] ./.) { inherit self lib inputs withSystem; };
+  });
 in {
-  imports = allExcept [] ./.;
-  
   options.flake.lib = lib.mkOption {
-    type = with lib.types; attrs;
+    type = lib.types.attrs;
     default = {};
+    description = "TODO";
   };
+
+  config.flake.lib = (ethy' lib).ethy;
 
   config.perSystem._module.args.lib =
     let
       lib' = inputs.nixpkgs.lib;
-      libethy = lib'.makeExtensible (_: {
-        ethy = self.lib;
-      });
-    in libethy.extend (_: _: lib');
+      libethy = lib'.fixedPoints.composeManyExtensions [
+        (_: ethy')
+        (_: _: inputs.home-manager.lib)
+      ];
+    in lib'.extend libethy;
 }
