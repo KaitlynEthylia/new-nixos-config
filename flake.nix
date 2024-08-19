@@ -6,8 +6,9 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
     lix.url = "git+https://git.lix.systems/lix-project/nixos-module";
+    hardware.url = "github:NixOS/nixos-hardware";
 
-    aagl-gtk-on-nix = {
+    aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -18,7 +19,7 @@
     };
 
     home-manager = {
-      url = "path:/home/kaitlyn/Files/home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     musnix = {

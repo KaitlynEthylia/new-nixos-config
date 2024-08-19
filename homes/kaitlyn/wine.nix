@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  ethy.games.genshin = true;
-
   home.packages = with pkgs; [
     protontricks
     winetricks

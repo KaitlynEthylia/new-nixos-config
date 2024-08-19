@@ -25,6 +25,7 @@ in {
     pkgs = pkgs';
     specialArgs = {
       inherit lib;
+      inherit inputs;
     };
 
     modules = concatLists [
