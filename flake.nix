@@ -7,6 +7,11 @@
     catppuccin.url = "github:catppuccin/nix";
     lix.url = "git+https://git.lix.systems/lix-project/nixos-module";
 
+    aagl-gtk-on-nix = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";

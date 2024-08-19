@@ -11,4 +11,8 @@
     };
   };
   programs.gamemode.enable = true;
+
+  # TODO consolidate
+
+  networking.mihoyo-telemetry.block = true;
 }

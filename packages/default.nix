@@ -1,13 +1,14 @@
 { self, inputs, ... }:
 let
-  inherit (self.lib) attrsImport allExcept;
+  inherit (self.lib) attrsImport allExcept modules;
   derivations = attrsImport (allExcept [] ./.) null; 
 in {
   perSystem = { system, lib, ... }:
   let
     pkgs = import inputs.nixpkgs {
       inherit system;
-      overlays = [ self.overlays.default ];
+      overlays = [ self.overlays.default ]
+        ++ modules "overlays";
       config.allowUnfree = true;
     };
   in {

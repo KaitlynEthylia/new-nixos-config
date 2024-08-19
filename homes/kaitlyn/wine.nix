@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  ethy.games.genshin = true;
+
   home.packages = with pkgs; [
-    wineWowPackages.waylandFull
     protontricks
     winetricks
   ];

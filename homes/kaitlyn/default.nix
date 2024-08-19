@@ -3,7 +3,6 @@
 {
   imports = (lib.ethy.allExcept [
     ./lang
-    ./wine
   ] ./.) ++ (lib.ethy.allExcept [] ./lang);
 
   files = [ ./conf/home ];

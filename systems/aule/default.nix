@@ -16,15 +16,10 @@
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_9;
 
-  security.doas.enable = true;
-  security.doas.extraRules = [ {
-    groups = [ "wheel" ];
-    persist = true;
-    keepEnv = true;
-  } ];
-  security.sudo.enable = false;
+  ethy.doas = true;
+  ethy.bluetooth = true;
+
   environment.systemPackages = with pkgs; [
-    (writeShellScriptBin "sudo" ''exec doas $@'')
     git
     psmisc
     pciutils
